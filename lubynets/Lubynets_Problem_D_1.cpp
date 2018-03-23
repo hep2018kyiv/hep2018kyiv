@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include <iostream>
 using namespace std;
-
+// change for test
 int main()
 {
     int R, N;   // field size, number of robots;
