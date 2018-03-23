@@ -140,9 +140,6 @@ struct obj_info *ListInsert(aListHead, aBlock)
 	struct obj_info *element;
 
 	element = aListHead;
-	for (;;) {
-
-	}
 }
 
 
