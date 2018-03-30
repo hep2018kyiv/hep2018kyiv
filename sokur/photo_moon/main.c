@@ -11,10 +11,10 @@
 
 struct obj_info {
 	int id;                    // ідентифікатор об'єкта
-	int lind;                  // лінійний індекс першого білого пікселя
-	int count;                 // вказує кількість білих пікселів їх неперервної послідовності в рядка
-	struct obj_info *next;     // список різних об'єктів
-	struct obj_info *sibling;  // список рядків одного об'єкту
+	int lind;                  // лінійний індекс першого білого пікселя блоку
+	int count;                 // кількість пікселів блоку
+	struct obj_info *next;     // у разі 1-го блоку зі списку - переводить на інший об'єкт, у всіх інших блоках - переводить на попередній блок
+	struct obj_info *sibling;  // переводить на наступний блок об'єкта
 };
 
 struct input_data {
@@ -48,13 +48,13 @@ int main(argc, argv)
 
 	stm = fopen(argv[1], "r");
 	if (!stm) {
-		perror("Невдале відкриття файлу");
+		perror("Невдале відкриття файлу (unsuccessful file opening)");
 		return (EXIT_FAILURE);
 		/* NOTREACHED */
 	};
 
 	radius = PhotoHandler(stm);
-	printf("%s: %d\n", "Радіус місяця", radius);
+	printf("%s: %d\n", "Радіус місяця (moon radius)", radius);
 
 #ifdef _WIN32
 	SetConsoleOutputCP(oldcodepage);
