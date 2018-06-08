@@ -1,0 +1,69 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+
+
+	
+using namespace std;
+int main()
+{       
+   int n,m;
+   int r, r_max=0;	
+   cin>>n>>m;
+   int luna=0;
+   bool **mat= new bool* [m] ;
+   
+   for (int k = 0; k < m; k++)
+   {
+   mat[k] = new bool [n];
+   }
+   char pixel;
+   
+   for(int i=0; i<m; i++)
+        for(int j=0; j<n; j++)
+	{
+	cin>>pixel;
+	if(pixel=='.')
+	mat[i][j]=0;
+	if(pixel=='*')
+	mat[i][j]=1;
+	}
+      
+	for(int i=1; i<m-1; i++)
+	{ 
+		 if (r_max>m-i){break;}
+	        for(int j=1; j<n-1; j++)
+		{
+		         if (r_max>n-j){break;}	
+		         
+		         bool luna=0;
+			 do
+			 {
+				if(mat[i][j]==1)
+		
+				
+				{
+				if (luna==0){ r=1; luna=1;}
+				
+				if ((i-r>=0)&&(j-r>=0))
+				{
+				  for(int k=-r;k<=r;k++)
+				    for(int l=-r; l<=r; l++)
+				      if( (mat[k+i][l+j]==0) && (r>=sqrt(float(k*k+l*l))) ) { luna=0; break;}
+				}
+				else luna=0;     
+				      
+				if(luna ==1)  r++;	  
+				
+				      if (r>r_max)
+				      r_max=r;
+				}
+			}while(luna==1);
+		}
+		       
+	}
+		      
+	delete mat;
+	cout<<r_max-1<<endl;
+	return 0;
+}
