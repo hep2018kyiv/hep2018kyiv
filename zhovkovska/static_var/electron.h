@@ -1,10 +1,11 @@
 ﻿#pragma once
 #include "I_ParticleDefinition.h"
+#include "Particle.h"
 #include "constants.h"
+// long Particle::N = 0;
 template <typename T>
-class Electron : public IParticleDefinition<T>
+class Electron : public Particle, public IParticleDefinition<T>
 {
-    static long N;
 private:
     std::string m_name;
     T m_mass;
@@ -14,16 +15,16 @@ private:
     T m_E;
     T m_PID;
     std::string m_family;
+    const long current_id;
 public:
 	Electron(double P) :
-		m_electric_charge(-1.), m_spin (0.5), m_family("lepton")
+		m_electric_charge(-1.), m_spin (0.5), m_family("lepton"), current_id(Particle::id++)
 	    {
        	 m_name = "electron";
 		 m_mass = 0.511;
 		 m_P = P;
          m_PID = 11;
-         N++;
-		}
+        }
 	~Electron() {}
 	T getE()
 	{
@@ -32,5 +33,5 @@ public:
 	std::string getName() { return m_name; }
 	T getCharge() { return m_electric_charge; }
 	T getPID() { return m_PID; }
-	static int getN() { return N;}    
+	int getId() { return current_id;}    
 };

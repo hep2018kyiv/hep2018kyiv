@@ -8,15 +8,17 @@
 #include "photon.h"
 #include "proton.h"
 #include "I_ParticleDefinition.h"
+#include "Particle.h"
 
+long Particle::id = 0;
 
 int main()
 {
 	Electron<double> e(0.01);
 	std::cout.precision(std::numeric_limits< double >::max_digits10);
-	std::cout << "E: " << e.getE() << std::endl;
+	std::cout << "E: " << e.getE() <<"\t N: "<<e.getId()<< std::endl;
 	Photon<double> p(0.02);
-	std::cout << "E: " << p.getE() << std::endl;
+    std::cout << "E: " << p.getE() <<"\t N: "<<p.getId() << std::endl;
 
 	std::vector<std::unique_ptr<IParticleDefinition<double>>> particals;
 	std::unique_ptr<IParticleDefinition<double>> pt;
@@ -41,7 +43,7 @@ int main()
 	{
 		double E = particle->getE();
         double c = particle->getCharge();
-        std::cout << "name: " << particle->getName() << "\tE:" << E << "\tcharge:" << c <<" N:  "<< particle->getN()<<"\n";
+        std::cout << "name: " << particle->getName() << "\tE:" << E << "\tcharge:" << c <<" N:  "<< particle->getId()<<"\n";
 	}
 	return 0;
 }
